@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Notes from "./components/Notes";
+import CreateNote from "./components/CreateNote";
+import EditNote from "./components/EditNote";
+import { ContextStore } from "./api/ContextStore";
 
-function App() {
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+      <div style={{ maxWidth: "30rem", margin: "4rem auto" }}>
+        <ContextStore>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={ Notes} />
+            <Route exact path="/notes" component={ Notes } />
+            <Route path="/note/create" component={ CreateNote } />
+            <Route path="/note/edit/:id" component={ EditNote } />
+          </Switch>
+        </Router>
+        </ContextStore>
+      </div>
+  )
+};
 
 export default App;
